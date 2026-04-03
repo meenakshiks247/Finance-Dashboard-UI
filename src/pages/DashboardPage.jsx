@@ -1,19 +1,61 @@
 import {
-  dashboardStats,
   insights,
   monthlyTrend,
+  transactions,
   recentTransactions,
 } from '../data/dashboardData';
-import { formatCurrency } from '../utils/formatters';
-import { StatCard } from '../components/dashboard/StatCard';
+import { formatCurrency, formatRupee } from '../utils/formatters';
 import { SectionCard } from '../components/dashboard/SectionCard';
 import { InsightCard } from '../components/dashboard/InsightCard';
 import { TransactionRow } from '../components/dashboard/TransactionRow';
+import { SummaryCard } from '../components/dashboard/SummaryCard';
 
 const chartBars = monthlyTrend.map((item) => ({
   ...item,
   height: `${item.value}%`,
 }));
+
+const totals = transactions.reduce(
+  (accumulator, transaction) => {
+    if (transaction.amount >= 0) {
+      accumulator.totalIncome += transaction.amount;
+    } else {
+      accumulator.totalExpenses += Math.abs(transaction.amount);
+    }
+
+    accumulator.totalBalance += transaction.amount;
+    return accumulator;
+  },
+  {
+    totalBalance: 0,
+    totalIncome: 0,
+    totalExpenses: 0,
+  },
+);
+
+const summaryCards = [
+  {
+    title: 'Total Balance',
+    value: formatRupee(totals.totalBalance),
+    subtitle: 'Net amount after income and expenses',
+    icon: '₹',
+    tone: 'emerald',
+  },
+  {
+    title: 'Total Income',
+    value: formatRupee(totals.totalIncome),
+    subtitle: 'All incoming money from salary and extras',
+    icon: '⬆',
+    tone: 'blue',
+  },
+  {
+    title: 'Total Expenses',
+    value: formatRupee(totals.totalExpenses),
+    subtitle: 'All spending across categories',
+    icon: '⬇',
+    tone: 'amber',
+  },
+];
 
 export function DashboardPage() {
   return (
@@ -46,9 +88,9 @@ export function DashboardPage() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {dashboardStats.map((stat) => (
-          <StatCard key={stat.label} {...stat} />
+      <section className="grid gap-4 md:grid-cols-3">
+        {summaryCards.map((card) => (
+          <SummaryCard key={card.title} {...card} />
         ))}
       </section>
 

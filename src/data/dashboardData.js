@@ -1,3 +1,5 @@
+import { transactions } from './transactionsData';
+
 export const navigationItems = [
   { label: 'Overview', href: '#overview', active: true },
   { label: 'Charts', href: '#charts' },
@@ -66,9 +68,12 @@ export const insights = [
   },
 ];
 
-export const recentTransactions = [
-  { name: 'Salary Deposit', category: 'Income', amount: 3200, date: 'Apr 1', type: 'credit' },
-  { name: 'Apartment Rent', category: 'Housing', amount: -1200, date: 'Apr 1', type: 'debit' },
-  { name: 'Groceries', category: 'Daily Needs', amount: -86.54, date: 'Mar 31', type: 'debit' },
-  { name: 'Freelance Bonus', category: 'Income', amount: 640, date: 'Mar 29', type: 'credit' },
-];
+export const recentTransactions = transactions.slice(0, 8).map((transaction) => ({
+  name: transaction.description,
+  category: transaction.category,
+  amount: transaction.amount,
+  date: new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+  type: transaction.type === 'income' ? 'credit' : 'debit',
+}));
+
+export { transactions };

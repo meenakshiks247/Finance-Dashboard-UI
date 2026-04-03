@@ -6,6 +6,17 @@ export function formatCurrency(amount) {
   }).format(amount);
 }
 
+export function formatRupee(amount, options = {}) {
+  const { maximumFractionDigits = 0, compact = false } = options;
+
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    notation: compact ? 'compact' : 'standard',
+    maximumFractionDigits,
+  }).format(amount);
+}
+
 export function formatCompactCurrency(amount) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
