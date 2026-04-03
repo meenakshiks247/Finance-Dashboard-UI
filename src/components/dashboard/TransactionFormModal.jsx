@@ -84,17 +84,17 @@ export function TransactionFormModal({ isOpen, onClose, onSubmit, mode = 'add', 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 px-4 py-6 backdrop-blur-sm">
-      <div className="w-full max-w-2xl rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--color-overlay)] px-4 py-6 backdrop-blur-sm">
+      <div className="theme-surface w-full max-w-2xl rounded-3xl border p-5 shadow-2xl sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+            <p className="theme-muted text-xs font-semibold uppercase tracking-[0.18em]">
               Admin Action
             </p>
-            <h2 className="mt-1 text-2xl font-semibold text-slate-900 dark:text-slate-100">
+            <h2 className="theme-text-strong mt-1 text-2xl font-semibold">
               {mode === 'edit' ? 'Edit Transaction' : 'Add Transaction'}
             </h2>
-            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            <p className="theme-muted mt-2 text-sm">
               {mode === 'edit'
                 ? 'Update the selected income or expense entry.'
                 : 'Create a new income or expense entry for the dashboard.'}
@@ -104,7 +104,7 @@ export function TransactionFormModal({ isOpen, onClose, onSubmit, mode = 'add', 
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full bg-slate-100 px-3 py-1.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+            className="btn btn-ghost btn-sm"
             aria-label="Close modal"
           >
             ✕
@@ -113,19 +113,19 @@ export function TransactionFormModal({ isOpen, onClose, onSubmit, mode = 'add', 
 
         <form className="mt-6 grid gap-4 sm:grid-cols-2" onSubmit={handleSubmit} noValidate>
           <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Date</span>
+            <span className="theme-label">Date</span>
             <input
               type="date"
               name="date"
               value={formData.date}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:ring-4 focus:ring-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900"
+              className="theme-input"
             />
             {errors.date ? <p className="text-xs font-medium text-rose-600">{errors.date}</p> : null}
           </label>
 
           <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Amount</span>
+            <span className="theme-label">Amount</span>
             <input
               type="number"
               name="amount"
@@ -134,18 +134,18 @@ export function TransactionFormModal({ isOpen, onClose, onSubmit, mode = 'add', 
               value={formData.amount}
               onChange={handleChange}
               placeholder="0.00"
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:ring-4 focus:ring-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900"
+              className="theme-input"
             />
             {errors.amount ? <p className="text-xs font-medium text-rose-600">{errors.amount}</p> : null}
           </label>
 
           <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Category</span>
+            <span className="theme-label">Category</span>
             <select
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-300 focus:bg-white focus:ring-4 focus:ring-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900"
+              className="theme-input"
             >
               {categoryOptions.map((option) => (
                 <option key={option} value={option}>
@@ -157,12 +157,12 @@ export function TransactionFormModal({ isOpen, onClose, onSubmit, mode = 'add', 
           </label>
 
           <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Type</span>
+            <span className="theme-label">Type</span>
             <select
               name="type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-300 focus:bg-white focus:ring-4 focus:ring-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900"
+              className="theme-input"
             >
               <option value="income">Income</option>
               <option value="expense">Expense</option>
@@ -171,14 +171,14 @@ export function TransactionFormModal({ isOpen, onClose, onSubmit, mode = 'add', 
           </label>
 
           <label className="space-y-2 sm:col-span-2">
-            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Description</span>
+            <span className="theme-label">Description</span>
             <textarea
               name="description"
               rows="4"
               value={formData.description}
               onChange={handleChange}
               placeholder="Add a short note about this transaction"
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:ring-4 focus:ring-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900"
+              className="theme-input"
             />
             {errors.description ? (
               <p className="text-xs font-medium text-rose-600">{errors.description}</p>
@@ -189,14 +189,14 @@ export function TransactionFormModal({ isOpen, onClose, onSubmit, mode = 'add', 
             <button
               type="button"
               onClick={onClose}
-              className="rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+              className="btn btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!canSubmit}
-              className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100"
+              className="btn btn-primary"
             >
                 {mode === 'edit' ? 'Update Transaction' : 'Save Transaction'}
             </button>

@@ -11,21 +11,19 @@ import {
 import { formatCurrencyValue } from '../../utils/transactionUtils';
 import { useDashboard } from '../../context/DashboardContext';
 
-function TrendTooltip({ active, payload, label, theme }) {
+function TrendTooltip({ active, payload, label }) {
   if (!active || !payload || payload.length === 0) {
     return null;
   }
 
   return (
     <div
-      className={`min-w-40 rounded-xl border px-3 py-2.5 shadow-lg ${
-        theme === 'dark' ? 'border-slate-700 bg-slate-900/95' : 'border-slate-200 bg-white/95'
-      }`}
+      className="min-w-40 rounded-xl border border-[var(--chart-tooltip-border)] bg-[var(--chart-tooltip-bg)] px-3 py-2.5 shadow-lg"
     >
-      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
+      <p className="theme-muted text-[11px] font-semibold uppercase tracking-[0.12em]">
         {label}
       </p>
-      <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <p className="theme-text-strong mt-1 text-sm font-semibold">
         Balance: {formatCurrencyValue(payload[0].value, { maximumFractionDigits: 0 })}
       </p>
     </div>
@@ -35,14 +33,16 @@ function TrendTooltip({ active, payload, label, theme }) {
 export function BalanceTrendChart({ data = [] }) {
   const { theme } = useDashboard();
 
-  const axisColor = theme === 'dark' ? '#94a3b8' : '#475569';
-  const gridColor = theme === 'dark' ? '#334155' : '#cbd5e1';
-  const borderColor = theme === 'dark' ? '#475569' : '#cbd5e1';
+  const rootStyles = getComputedStyle(document.documentElement);
+  const axisColor = rootStyles.getPropertyValue('--chart-axis').trim() || '#475569';
+  const gridColor = rootStyles.getPropertyValue('--chart-grid').trim() || '#cbd5e1';
+  const borderColor = rootStyles.getPropertyValue('--chart-border').trim() || '#cbd5e1';
+  const lineColor = theme === 'dark' ? '#ffffff' : '#0f172a';
 
   if (data.length === 0) {
     return (
-      <div className="flex h-56 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/40 sm:h-64">
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+      <div className="theme-surface-soft motion-fade-up flex h-56 items-center justify-center rounded-2xl border border-dashed sm:h-64">
+        <p className="theme-muted text-sm">
           Not enough transaction data to plot trend.
         </p>
       </div>
@@ -50,14 +50,14 @@ export function BalanceTrendChart({ data = [] }) {
   }
 
   return (
-    <div className="h-56 w-full sm:h-64">
+    <div className="motion-chart h-56 w-full sm:h-64">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 6, right: 10, left: 2, bottom: 24 }}>
           <CartesianGrid
             vertical={false}
             strokeDasharray="3 5"
             stroke={gridColor}
-            strokeOpacity={theme === 'dark' ? 0.45 : 0.4}
+            strokeOpacity={0.75}
           />
           <XAxis
             dataKey="label"
@@ -84,14 +84,17 @@ export function BalanceTrendChart({ data = [] }) {
               offset={8}
             />
           </YAxis>
-          <Tooltip content={<TrendTooltip theme={theme} />} cursor={{ stroke: axisColor, strokeDasharray: '4 4' }} />
+          <Tooltip content={<TrendTooltip />} cursor={{ stroke: axisColor, strokeDasharray: '4 4' }} />
           <Line
             type="monotone"
             dataKey="balance"
-            stroke={theme === 'dark' ? '#f8fafc' : '#0f172a'}
+            stroke={lineColor}
             strokeWidth={3.5}
-            dot={{ r: 2.8, fill: theme === 'dark' ? '#f8fafc' : '#0f172a', strokeWidth: 0 }}
-            activeDot={{ r: 5.5, stroke: theme === 'dark' ? '#0f172a' : '#ffffff', strokeWidth: 2 }}
+            dot={{ r: 2.8, fill: lineColor, strokeWidth: 0 }}
+            activeDot={{ r: 5.5, fill: lineColor, stroke: lineColor, strokeWidth: 2 }}
+            isAnimationActive
+            animationDuration={850}
+            animationEasing="ease-out"
           />
         </LineChart>
       </ResponsiveContainer>

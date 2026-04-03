@@ -274,58 +274,58 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-7 sm:space-y-8" id="overview">
-      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-colors duration-300 dark:border-slate-800 dark:from-slate-900 dark:to-slate-950 sm:p-8">
+      <section className="theme-surface motion-fade-up motion-delay-1 rounded-3xl border p-6 sm:p-8">
         <div className="grid gap-5 lg:grid-cols-[1.45fr_1fr] lg:items-stretch">
           <div className="max-w-3xl">
-            <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] text-slate-400 dark:text-slate-500">
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] tracking-normal text-slate-500 dark:bg-slate-800 dark:text-slate-300">
+            <p className="theme-muted inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em]">
+              <span className="theme-surface-soft theme-muted rounded-full border px-2 py-0.5 text-[11px] tracking-normal">
                 Live
               </span>
               Dashboard Overview
             </p>
-            <h2 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl">
+            <h2 className="theme-text-strong mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
               A clean, responsive finance dashboard starter.
             </h2>
-            <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400 sm:text-base">
+            <p className="theme-muted mt-3 text-sm leading-7 sm:text-base">
               This layout includes a top navigation bar, summary cards, a chart area, insights,
               and recent transactions in a modern minimal interface that is easy to extend.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 lg:h-full">
-            <div className="rounded-2xl bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-900/70">
-              <p className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+            <div className="theme-surface-soft motion-card motion-fade-up motion-delay-2 rounded-2xl border p-4 shadow-sm">
+              <p className="theme-muted inline-flex items-center gap-1.5">
                 <span aria-hidden="true">🎯</span>
                 Monthly Goal
               </p>
-              <p className="mt-2 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">$6,000</p>
+              <p className="theme-text-strong mt-2 text-3xl font-bold tracking-tight">$6,000</p>
             </div>
-            <div className="rounded-2xl bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-900/70">
-              <p className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+            <div className="theme-surface-soft motion-card motion-fade-up motion-delay-2 rounded-2xl border p-4 shadow-sm">
+              <p className="theme-muted inline-flex items-center gap-1.5">
                 <span aria-hidden="true">📌</span>
                 Saved So Far
               </p>
-              <p className="mt-2 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">$2,180</p>
+              <p className="theme-text-strong mt-2 text-3xl font-bold tracking-tight">$2,180</p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-900/70 sm:col-span-2">
+            <div className="theme-surface motion-card motion-fade-up motion-delay-3 rounded-2xl border p-4 shadow-sm sm:col-span-2">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+                  <p className="theme-muted text-xs font-semibold uppercase tracking-[0.14em]">
                     Current Net Position
                   </p>
-                  <p className="mt-2 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
+                  <p className="theme-text-strong mt-2 text-3xl font-bold tracking-tight">
                     {formatCurrencyValue(totals.totalBalance, { maximumFractionDigits: 0 })}
                   </p>
                 </div>
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                <span className="theme-surface-soft theme-text rounded-full border px-3 py-1 text-xs font-semibold">
                   {spendingEfficiency.toFixed(1)}% efficient
                 </span>
               </div>
 
-              <div className="mt-4 h-2.5 w-full rounded-full bg-slate-100 dark:bg-slate-800">
+              <div className="theme-surface-soft mt-4 h-2.5 w-full rounded-full border">
                 <div
-                  className="h-full rounded-full bg-slate-900 transition-all duration-300 dark:bg-white"
+                  className="h-full rounded-full bg-[var(--accent)] transition-all duration-300"
                   style={{ width: `${Math.min(100, Math.max(0, spendingEfficiency))}%` }}
                 />
               </div>
@@ -335,16 +335,16 @@ export function DashboardPage() {
       </section>
 
       {transactions.length === 0 ? (
-        <section className="rounded-3xl border border-dashed border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5 shadow-sm sm:p-8 dark:border-slate-800 dark:from-slate-900 dark:to-slate-950">
+        <section className="theme-surface motion-fade-up motion-delay-2 rounded-3xl border border-dashed p-5 shadow-sm sm:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+              <p className="theme-muted text-xs font-semibold uppercase tracking-[0.16em]">
                 Empty dashboard
               </p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 sm:text-3xl">
+              <h3 className="theme-text-strong mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
                 No transactions yet.
               </h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300 sm:text-base">
+              <p className="theme-muted mt-3 text-sm leading-6 sm:text-base">
                 Add your first transaction to unlock charts, summaries, and insights. If you want
                 a quick start, load the sample dataset and explore the dashboard right away.
               </p>
@@ -355,7 +355,7 @@ export function DashboardPage() {
                 <button
                   type="button"
                   onClick={handleOpenAddModal}
-                  className="w-full rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow active:scale-[0.98] dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 sm:w-auto"
+                  className="btn btn-primary w-full sm:w-auto"
                 >
                   Add Transaction
                 </button>
@@ -363,7 +363,7 @@ export function DashboardPage() {
               <button
                 type="button"
                 onClick={handleLoadSampleData}
-                className="w-full rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-slate-50 hover:shadow active:scale-[0.98] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 sm:w-auto"
+                className="btn btn-secondary w-full sm:w-auto"
               >
                 Load Sample Data
               </button>
@@ -373,8 +373,8 @@ export function DashboardPage() {
       ) : null}
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {summaryCards.map((card) => (
-          <SummaryCard key={card.title} {...card} />
+        {summaryCards.map((card, index) => (
+          <SummaryCard key={card.title} {...card} className={`motion-delay-${Math.min(index + 1, 3)}`} />
         ))}
       </section>
 
@@ -383,9 +383,9 @@ export function DashboardPage() {
           id="charts"
           subtitle="Chart Section"
           title="Monthly performance"
-          className="border-slate-200/90 bg-white shadow-md dark:border-slate-800/90 dark:bg-slate-900"
+          className="theme-surface-strong motion-fade-up motion-delay-4"
           action={
-            <span className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-600 transition-colors duration-300 dark:bg-slate-800 dark:text-slate-300">
+            <span className="theme-surface-soft theme-text rounded-full border px-3 py-1 text-sm transition-colors duration-300">
               Last 6 months
             </span>
           }
@@ -393,8 +393,8 @@ export function DashboardPage() {
           <div className="grid gap-5 xl:grid-cols-[1.4fr_0.8fr] xl:items-end">
             <Suspense
               fallback={
-                <div className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50">
-                  <p className="text-sm text-slate-500">Loading chart...</p>
+                <div className="theme-surface-soft flex h-64 items-center justify-center rounded-2xl border border-dashed">
+                  <p className="theme-muted text-sm">Loading chart...</p>
                 </div>
               }
             >
@@ -402,9 +402,9 @@ export function DashboardPage() {
             </Suspense>
 
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
-              <div className="rounded-3xl bg-slate-50 p-4 transition-colors duration-300 dark:bg-slate-950/50 sm:p-5">
-                <p className="text-sm text-slate-500 dark:text-slate-400">Average Monthly Net</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-100">
+              <div className="theme-surface-soft motion-card motion-fade-up motion-delay-4 rounded-3xl border p-4 sm:p-5">
+                <p className="theme-muted text-sm">Average Monthly Net</p>
+                <p className="theme-text-strong mt-2 text-2xl font-semibold">
                   {formatCurrencyValue(averageMonthlyNet, { maximumFractionDigits: 0 })}
                 </p>
                 <p
@@ -415,24 +415,24 @@ export function DashboardPage() {
                   {averageMonthlyNet >= 0 ? 'Positive trend' : 'Needs attention'}
                 </p>
               </div>
-              <div className="rounded-3xl bg-slate-50 p-4 transition-colors duration-300 dark:bg-slate-950/50 sm:p-5">
-                <p className="text-sm text-slate-500 dark:text-slate-400">Spending Efficiency</p>
-                <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-100">
+              <div className="theme-surface-soft motion-card motion-fade-up motion-delay-5 rounded-3xl border p-4 sm:p-5">
+                <p className="theme-muted text-sm">Spending Efficiency</p>
+                <p className="theme-text-strong mt-2 text-2xl font-semibold">
                   {spendingEfficiency.toFixed(1)}%
                 </p>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                <p className="theme-muted mt-2 text-sm">
                   Based on current income versus expenses
                 </p>
               </div>
 
-              <div className="rounded-3xl bg-slate-50 p-4 transition-colors duration-300 dark:bg-slate-950/50 sm:p-5">
-                <p className="text-sm text-slate-500 dark:text-slate-400">Expense Breakdown</p>
-                <p className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-100">By category</p>
+              <div className="theme-surface-soft motion-card motion-fade-up motion-delay-6 rounded-3xl border p-4 sm:p-5">
+                <p className="theme-muted text-sm">Expense Breakdown</p>
+                <p className="theme-text-strong mt-1 text-lg font-semibold">By category</p>
                 <div className="mt-4">
                   <Suspense
                     fallback={
-                      <div className="flex h-60 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/40">
-                        <p className="text-sm text-slate-500 dark:text-slate-400">Loading chart...</p>
+                      <div className="theme-surface-soft flex h-60 items-center justify-center rounded-2xl border border-dashed">
+                        <p className="theme-muted text-sm">Loading chart...</p>
                       </div>
                     }
                   >
@@ -448,11 +448,15 @@ export function DashboardPage() {
           id="insights"
           subtitle="Insights Section"
           title="What stands out"
-          className="border-slate-200/80 bg-slate-50/60 shadow-sm dark:border-slate-800 dark:bg-slate-900/75"
+          className="theme-surface-soft motion-fade-up motion-delay-5 border shadow-sm"
         >
           <div className="space-y-4">
-            {dynamicInsights.map((item) => (
-              <InsightCard key={item.title} {...item} />
+            {dynamicInsights.map((item, index) => (
+              <InsightCard
+                key={item.title}
+                {...item}
+                className={`motion-delay-${Math.min(index + 4, 6)}`}
+              />
             ))}
           </div>
         </SectionCard>
@@ -462,17 +466,17 @@ export function DashboardPage() {
         id="transactions"
         subtitle="Transactions Section"
         title="All transactions"
-        className="border-slate-200/80 bg-slate-50/60 shadow-sm dark:border-slate-800 dark:bg-slate-900/70"
+        className="theme-surface-soft motion-fade-up motion-delay-6 border shadow-sm"
         titleClassName="text-lg"
-        subtitleClassName="text-slate-500"
+        subtitleClassName="theme-muted"
         action={
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm text-slate-500 dark:text-slate-400">Updated from state</span>
+            <span className="theme-muted text-sm">Updated from state</span>
             {role === 'Admin' ? (
               <button
                 type="button"
                 onClick={handleOpenAddModal}
-                className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow active:scale-[0.98] dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100"
+                className="btn btn-primary btn-pill"
               >
                 Add Transaction
               </button>
@@ -482,7 +486,7 @@ export function DashboardPage() {
       >
         <div className="mb-4 flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
           <div className="relative w-full lg:max-w-md">
-            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+            <span className="theme-muted pointer-events-none absolute left-4 top-1/2 -translate-y-1/2">
               🔎
             </span>
             <input
@@ -490,18 +494,18 @@ export function DashboardPage() {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder="Search by category or description"
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition-colors duration-300 placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:ring-4 focus:ring-slate-100 dark:border-slate-700 dark:bg-slate-950/50 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:bg-slate-900"
+              className="theme-input py-3 pl-11 pr-4"
               aria-label="Search transactions by category or description"
             />
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between xl:justify-end">
-            <label className="flex w-full items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-600 shadow-sm transition-colors duration-300 dark:border-slate-700 dark:bg-slate-950/50 dark:text-slate-300 sm:w-auto">
-              <span className="font-medium text-slate-500 dark:text-slate-400">Sort</span>
+            <label className="theme-surface-soft theme-text flex w-full items-center gap-3 rounded-2xl border px-4 py-2 text-sm shadow-sm transition-colors duration-300 sm:w-auto">
+              <span className="theme-muted font-medium">Sort</span>
               <select
                 value={sortOption}
                 onChange={(event) => setSortOption(event.target.value)}
-                className="w-full bg-transparent text-sm font-semibold text-slate-900 outline-none dark:text-slate-100 sm:w-auto"
+                className="theme-text w-full bg-transparent text-sm font-semibold outline-none sm:w-auto"
                 aria-label="Sort transactions"
               >
                 {sortOptions.map((option) => (
@@ -521,10 +525,10 @@ export function DashboardPage() {
                     key={button.value}
                     type="button"
                     onClick={() => setTransactionFilter(button.value)}
-                    className={`rounded-full px-4 py-2 text-sm font-semibold transition duration-200 active:scale-[0.98] ${
+                    className={`btn btn-pill text-sm font-semibold transition duration-200 active:scale-[0.98] ${
                       isActive
-                        ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950'
-                        : 'bg-slate-100 text-slate-600 hover:-translate-y-0.5 hover:bg-slate-200 hover:text-slate-900 hover:shadow-sm dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-white'
+                        ? 'btn-primary'
+                        : 'btn-secondary'
                     }`}
                     aria-pressed={isActive}
                   >
@@ -536,14 +540,14 @@ export function DashboardPage() {
           </div>
         </div>
 
-        <div className="mb-4 flex flex-col gap-2 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-500 transition-colors duration-300 dark:bg-slate-950/50 dark:text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+        <div className="theme-surface-soft theme-muted mb-4 flex flex-col gap-2 rounded-2xl border px-4 py-3 text-sm transition-colors duration-300 sm:flex-row sm:items-center sm:justify-between">
           <span>
-            Showing <span className="font-semibold text-slate-900 dark:text-slate-100">{filteredTransactions.length}</span>{' '}
+            Showing <span className="theme-text-strong font-semibold">{filteredTransactions.length}</span>{' '}
             matching transaction{filteredTransactions.length === 1 ? '' : 's'}
           </span>
           <span className="hidden sm:inline">
-            Filter: <span className="font-semibold text-slate-700 dark:text-slate-200">{activeFilterLabel}</span> • Sort:{' '}
-            <span className="font-semibold text-slate-700 dark:text-slate-200">{activeSortLabel}</span>
+            Filter: <span className="theme-text font-semibold">{activeFilterLabel}</span> • Sort:{' '}
+            <span className="theme-text font-semibold">{activeSortLabel}</span>
           </span>
         </div>
 

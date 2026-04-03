@@ -1,10 +1,21 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { formatCurrencyValue } from '../../utils/transactionUtils';
-import { useDashboard } from '../../context/DashboardContext';
 
-const COLORS = ['#0f766e', '#2563eb', '#d97706', '#7c3aed', '#dc2626', '#0891b2', '#334155'];
+function getChartColors() {
+  const rootStyles = getComputedStyle(document.documentElement);
 
-function BreakdownTooltip({ active, payload, theme }) {
+  return [
+    rootStyles.getPropertyValue('--chart-slice-1').trim() || '#0f766e',
+    rootStyles.getPropertyValue('--chart-slice-2').trim() || '#2563eb',
+    rootStyles.getPropertyValue('--chart-slice-3').trim() || '#d97706',
+    rootStyles.getPropertyValue('--chart-slice-4').trim() || '#7c3aed',
+    rootStyles.getPropertyValue('--chart-slice-5').trim() || '#dc2626',
+    rootStyles.getPropertyValue('--chart-slice-6').trim() || '#0891b2',
+    rootStyles.getPropertyValue('--chart-slice-7').trim() || '#334155',
+  ];
+}
+
+function BreakdownTooltip({ active, payload }) {
   if (!active || !payload || payload.length === 0) {
     return null;
   }
@@ -13,14 +24,12 @@ function BreakdownTooltip({ active, payload, theme }) {
 
   return (
     <div
-      className={`min-w-36 rounded-xl border px-3 py-2 shadow-lg ${
-        theme === 'dark' ? 'border-slate-700 bg-slate-900/95' : 'border-slate-200 bg-white/95'
-      }`}
+      className="min-w-36 rounded-xl border border-[var(--chart-tooltip-border)] bg-[var(--chart-tooltip-bg)] px-3 py-2 shadow-lg"
     >
-      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
+      <p className="theme-muted text-[11px] font-semibold uppercase tracking-[0.12em]">
         {point.category}
       </p>
-      <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <p className="theme-text-strong mt-1 text-sm font-semibold">
         {formatCurrencyValue(point.amount, { maximumFractionDigits: 0 })}
       </p>
     </div>
@@ -28,18 +37,18 @@ function BreakdownTooltip({ active, payload, theme }) {
 }
 
 export function ExpenseBreakdownChart({ data = [] }) {
-  const { theme } = useDashboard();
+  const colors = getChartColors();
 
   if (data.length === 0) {
     return (
-      <div className="flex h-52 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/40 sm:h-60">
-        <p className="text-sm text-slate-500 dark:text-slate-400">No expense data to display yet.</p>
+      <div className="theme-surface-soft motion-fade-up flex h-52 items-center justify-center rounded-2xl border border-dashed sm:h-60">
+        <p className="theme-muted text-sm">No expense data to display yet.</p>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-3 xl:grid-cols-[1fr_0.95fr] xl:items-center">
+    <div className="motion-chart grid gap-3 xl:grid-cols-[1fr_0.95fr] xl:items-center">
       <div className="h-52 w-full sm:h-60">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -50,33 +59,36 @@ export function ExpenseBreakdownChart({ data = [] }) {
               innerRadius={58}
               outerRadius={88}
               paddingAngle={3}
+              isAnimationActive
+              animationDuration={850}
+              animationEasing="ease-out"
             >
               {data.map((entry, index) => (
-                <Cell key={entry.category} fill={COLORS[index % COLORS.length]} />
+                <Cell key={entry.category} fill={colors[index % colors.length]} />
               ))}
             </Pie>
-              <Tooltip content={<BreakdownTooltip theme={theme} />} />
+              <Tooltip content={<BreakdownTooltip />} />
           </PieChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="space-y-1.5 rounded-2xl bg-slate-50/75 p-2.5 dark:bg-slate-950/40 xl:max-h-60 xl:overflow-y-auto xl:pr-1">
+      <div className="theme-surface-soft space-y-1.5 rounded-2xl border p-2.5 xl:max-h-60 xl:overflow-y-auto xl:pr-1">
         {data.map((item, index) => (
           <div
             key={item.category}
-            className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-xl px-2.5 py-2 transition-colors duration-300 hover:bg-white dark:hover:bg-slate-900/60"
+            className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-xl px-2.5 py-2 transition-colors duration-300 hover:bg-white/85 dark:hover:bg-slate-900/60"
           >
             <div className="flex min-w-0 items-center gap-2.5">
               <span
                 className="h-2.5 w-2.5 shrink-0 rounded-full"
-                style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                style={{ backgroundColor: colors[index % colors.length] }}
                 aria-hidden="true"
               />
-              <span className="truncate text-sm font-medium text-slate-700 dark:text-slate-300">
+              <span className="theme-text truncate text-sm font-medium">
                 {item.category}
               </span>
             </div>
-            <span className="text-right text-sm font-semibold tabular-nums text-slate-900 dark:text-slate-100">
+            <span className="theme-text-strong text-right text-sm font-semibold tabular-nums">
               {formatCurrencyValue(item.amount, { compact: true, maximumFractionDigits: 1 })}
             </span>
           </div>

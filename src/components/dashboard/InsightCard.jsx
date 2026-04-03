@@ -1,9 +1,17 @@
-export function InsightCard({ title, description, badge, label, icon = '•', tone = 'slate' }) {
+export function InsightCard({
+  title,
+  description,
+  badge,
+  label,
+  icon = '•',
+  tone = 'slate',
+  className = '',
+}) {
   const toneStyles = {
-    slate: 'border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950/40',
-    rose: 'border-rose-200 bg-rose-50/60 dark:border-rose-900/50 dark:bg-rose-950/20',
-    amber: 'border-amber-200 bg-amber-50/60 dark:border-amber-900/50 dark:bg-amber-950/20',
-    emerald: 'border-emerald-200 bg-emerald-50/60 dark:border-emerald-900/50 dark:bg-emerald-950/20',
+    slate: 'border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950/40',
+    rose: 'border-rose-200 bg-rose-50/80 dark:border-rose-900/50 dark:bg-rose-950/20',
+    amber: 'border-amber-200 bg-amber-50/80 dark:border-amber-900/50 dark:bg-amber-950/20',
+    emerald: 'border-emerald-200 bg-emerald-50/80 dark:border-emerald-900/50 dark:bg-emerald-950/20',
   };
 
   const iconStyles = {
@@ -18,14 +26,14 @@ export function InsightCard({ title, description, badge, label, icon = '•', to
 
   return (
     <article
-      className={`group rounded-3xl border p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-5 ${cardTone}`}
+      className={`group motion-card motion-fade-up rounded-3xl border p-4 shadow-sm sm:p-5 ${cardTone} ${className}`}
     >
       <div className="flex items-center justify-between gap-3">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+        <span className="theme-muted text-[11px] font-semibold uppercase tracking-[0.14em]">
           {label || 'Insight'}
         </span>
         {badge ? (
-          <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 transition duration-300 group-hover:shadow dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700">
+          <span className="theme-surface-soft theme-text rounded-full border px-3 py-1 text-xs font-semibold shadow-sm transition duration-300 group-hover:shadow">
             {badge}
           </span>
         ) : null}
@@ -39,8 +47,8 @@ export function InsightCard({ title, description, badge, label, icon = '•', to
           {icon}
         </span>
         <div>
-          <h4 className="text-base font-semibold text-slate-900 dark:text-slate-100">{title}</h4>
-          <p className="mt-1.5 text-sm leading-6 text-slate-600 dark:text-slate-400">{description}</p>
+          <h4 className="theme-text-strong text-base font-semibold">{title}</h4>
+          <p className="theme-muted mt-1.5 text-sm leading-6">{description}</p>
         </div>
       </div>
     </article>

@@ -11,19 +11,19 @@ export function SectionCard({
   return (
     <section
       id={id}
-      className={`rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition duration-200 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 sm:p-6 ${className}`}
+      className={`theme-surface motion-card rounded-3xl border p-5 sm:p-6 ${className}`}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p
-            className={`text-sm font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500 ${subtitleClassName}`}
+            className={`theme-muted text-sm font-semibold uppercase tracking-[0.18em] ${subtitleClassName}`}
           >
             {subtitle}
           </p>
           <h3
-            className={`mt-1 inline-flex items-center gap-2 text-xl font-semibold text-slate-900 dark:text-slate-100 ${titleClassName}`}
+            className={`theme-text-strong mt-1 inline-flex items-center gap-2 text-xl font-semibold ${titleClassName}`}
           >
-            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+            <span className="theme-surface-soft theme-muted inline-flex h-6 w-6 items-center justify-center rounded-full border text-xs">
               ◦
             </span>
             {title}
