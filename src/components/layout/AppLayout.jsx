@@ -1,12 +1,12 @@
-import { useLayout } from '../../context/LayoutContext';
 import { Header } from './Header';
+import { useDashboard } from '../../context/DashboardContext';
 
 export function AppLayout({ children }) {
-  const { theme } = useLayout();
+  const { theme } = useDashboard();
 
   return (
     <div
-      className={`min-h-screen transition-colors ${
+      className={`min-h-screen transition-colors duration-300 ${
         theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
       }`}
     >

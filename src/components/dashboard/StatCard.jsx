@@ -13,18 +13,18 @@ export function StatCard({ label, value, change, format, tone }) {
   const colorClass = toneClasses[tone] ?? toneClasses.blue;
 
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-colors duration-300 dark:border-slate-800 dark:bg-slate-900">
       <div className={`h-1.5 w-20 rounded-full bg-gradient-to-r ${colorClass}`} />
-      <p className="mt-4 text-sm font-medium text-slate-500">{label}</p>
+      <p className="mt-4 text-sm font-medium text-slate-500 dark:text-slate-400">{label}</p>
       <div className="mt-3 flex items-end justify-between gap-4">
-        <h3 className="text-3xl font-semibold tracking-tight text-slate-900">
+        <h3 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
           {format === 'currency' ? formatCompactCurrency(value) : displayValue}
         </h3>
         <span
           className={`rounded-full px-3 py-1 text-sm font-semibold ${
             change >= 0
-              ? 'bg-emerald-50 text-emerald-700'
-              : 'bg-rose-50 text-rose-700'
+              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/35 dark:text-emerald-300'
+              : 'bg-rose-50 text-rose-700 dark:bg-rose-950/35 dark:text-rose-300'
           }`}
         >
           {changeLabel}

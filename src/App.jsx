@@ -1,14 +1,14 @@
 import { AppLayout } from './components/layout/AppLayout';
-import { LayoutProvider } from './context/LayoutContext';
+import { DashboardProvider } from './context/DashboardContext';
 import { DashboardPage } from './pages/DashboardPage';
 
 function App() {
   return (
-    <LayoutProvider>
+    <DashboardProvider>
       <AppLayout>
         <DashboardPage />
       </AppLayout>
-    </LayoutProvider>
+    </DashboardProvider>
   );
 }
 
