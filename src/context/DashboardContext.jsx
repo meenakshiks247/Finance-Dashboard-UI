@@ -12,6 +12,10 @@ function getDefaultState() {
     searchTerm: '',
     transactionFilter: 'all',
     sortOption: 'date-desc',
+    selectedCategories: [],
+    startDate: '',
+    endDate: '',
+    groupBy: 'none',
   };
 }
 
@@ -43,6 +47,14 @@ function readStoredState() {
         ['date-desc', 'date-asc', 'amount-desc', 'amount-asc'].includes(parsed.sortOption)
           ? parsed.sortOption
           : fallback.sortOption,
+      selectedCategories: Array.isArray(parsed.selectedCategories)
+        ? parsed.selectedCategories.filter((item) => typeof item === 'string')
+        : fallback.selectedCategories,
+      startDate: typeof parsed.startDate === 'string' ? parsed.startDate : fallback.startDate,
+      endDate: typeof parsed.endDate === 'string' ? parsed.endDate : fallback.endDate,
+      groupBy: ['none', 'category', 'month', 'type'].includes(parsed.groupBy)
+        ? parsed.groupBy
+        : fallback.groupBy,
     };
   } catch {
     return getDefaultState();
@@ -70,6 +82,10 @@ export function DashboardProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState(storedState.searchTerm);
   const [transactionFilter, setTransactionFilter] = useState(storedState.transactionFilter);
   const [sortOption, setSortOption] = useState(storedState.sortOption);
+  const [selectedCategories, setSelectedCategories] = useState(storedState.selectedCategories);
+  const [startDate, setStartDate] = useState(storedState.startDate);
+  const [endDate, setEndDate] = useState(storedState.endDate);
+  const [groupBy, setGroupBy] = useState(storedState.groupBy);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -82,8 +98,23 @@ export function DashboardProvider({ children }) {
       searchTerm,
       transactionFilter,
       sortOption,
+      selectedCategories,
+      startDate,
+      endDate,
+      groupBy,
     });
-  }, [transactions, role, theme, searchTerm, transactionFilter, sortOption]);
+  }, [
+    transactions,
+    role,
+    theme,
+    searchTerm,
+    transactionFilter,
+    sortOption,
+    selectedCategories,
+    startDate,
+    endDate,
+    groupBy,
+  ]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -109,6 +140,14 @@ export function DashboardProvider({ children }) {
       setTransactionFilter,
       sortOption,
       setSortOption,
+      selectedCategories,
+      setSelectedCategories,
+      startDate,
+      setStartDate,
+      endDate,
+      setEndDate,
+      groupBy,
+      setGroupBy,
       isAddModalOpen,
       setIsAddModalOpen,
       isEditModalOpen,
@@ -124,6 +163,10 @@ export function DashboardProvider({ children }) {
       searchTerm,
       transactionFilter,
       sortOption,
+      selectedCategories,
+      startDate,
+      endDate,
+      groupBy,
       isAddModalOpen,
       isEditModalOpen,
       selectedTransaction,

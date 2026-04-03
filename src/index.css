@@ -2,21 +2,21 @@
 
 :root {
   color-scheme: light;
-  --color-bg: #f3f6fb;
+  --color-bg: #f5f7fb;
   --color-surface: #ffffff;
-  --color-surface-soft: #f7fafc;
+  --color-surface-soft: #f8fafd;
   --color-text: #0f172a;
   --color-text-strong: #020617;
-  --color-muted: #475569;
-  --color-border: #d7e0ea;
-  --color-border-strong: #c4cfdb;
+  --color-muted: #516074;
+  --color-border: #dde5ef;
+  --color-border-strong: #ccd7e4;
   --color-accent: #0f172a;
   --color-on-accent: #ffffff;
   --color-income: #15803d;
   --color-expense: #b91c1c;
   --color-overlay: rgba(2, 6, 23, 0.5);
-  --shadow-surface: 0 10px 30px -24px rgba(15, 23, 42, 0.35);
-  --shadow-surface-strong: 0 18px 40px -28px rgba(15, 23, 42, 0.42);
+  --shadow-surface: 0 14px 30px -26px rgba(15, 23, 42, 0.22);
+  --shadow-surface-strong: 0 20px 44px -32px rgba(15, 23, 42, 0.3);
   --chart-axis: #475569;
   --chart-grid: rgba(148, 163, 184, 0.45);
   --chart-border: #cbd5e1;
@@ -49,12 +49,12 @@
   --color-overlay: rgba(2, 6, 23, 0.6);
   --shadow-surface: 0 10px 30px -24px rgba(2, 6, 23, 0.65);
   --shadow-surface-strong: 0 18px 40px -28px rgba(2, 6, 23, 0.82);
-  --chart-axis: #94a3b8;
-  --chart-grid: rgba(71, 85, 105, 0.55);
-  --chart-border: #475569;
-  --chart-line: #f8fafc;
-  --chart-tooltip-bg: rgba(15, 23, 42, 0.96);
-  --chart-tooltip-border: #334155;
+  --chart-axis: #cbd5e1;
+  --chart-grid: rgba(148, 163, 184, 0.3);
+  --chart-border: #64748b;
+  --chart-line: #ffffff;
+  --chart-tooltip-bg: #0f172a;
+  --chart-tooltip-border: #64748b;
   --chart-slice-1: #2dd4bf;
   --chart-slice-2: #60a5fa;
   --chart-slice-3: #fbbf24;
@@ -123,7 +123,10 @@ body,
 }
 
 .theme-page {
-  background: var(--color-bg);
+  background:
+    radial-gradient(circle at 12% -8%, rgba(148, 163, 184, 0.14), transparent 36%),
+    radial-gradient(circle at 88% -14%, rgba(148, 163, 184, 0.12), transparent 34%),
+    var(--color-bg);
   color: var(--color-text);
 }
 
@@ -144,6 +147,7 @@ body,
   border-color: var(--color-border);
 }
 
+
 .theme-text {
   color: var(--color-text);
 }
@@ -158,6 +162,57 @@ body,
 
 .theme-border {
   border-color: var(--color-border);
+}
+
+.section-shell-hero {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 96%, var(--color-bg)), var(--color-surface));
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-surface-strong);
+}
+
+.section-shell-chart {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-surface);
+}
+
+.section-shell-insight {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, #ecfdf5 18%, var(--color-surface)), color-mix(in srgb, #eff6ff 12%, var(--color-surface)));
+  border-color: color-mix(in srgb, #bfdbfe 40%, var(--color-border));
+  box-shadow: var(--shadow-surface);
+}
+
+.section-shell-transactions {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-surface-strong);
+}
+
+.navbar-shell {
+  background: color-mix(in srgb, var(--color-surface) 96%, var(--color-bg));
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-surface);
+}
+
+.badge-income {
+  background: color-mix(in srgb, var(--color-income) 12%, var(--color-surface));
+  color: var(--color-income);
+  border-color: color-mix(in srgb, var(--color-income) 26%, var(--color-border));
+}
+
+.badge-expense {
+  background: color-mix(in srgb, var(--color-expense) 12%, var(--color-surface));
+  color: var(--color-expense);
+  border-color: color-mix(in srgb, var(--color-expense) 26%, var(--color-border));
+}
+
+.badge-income-strong {
+  color: var(--color-income);
+}
+
+.badge-expense-strong {
+  color: var(--color-expense);
 }
 
 .theme-on-accent {

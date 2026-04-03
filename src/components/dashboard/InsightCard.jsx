@@ -1,54 +1,82 @@
+import { useDashboard } from '../../context/DashboardContext';
+
 export function InsightCard({
   title,
   description,
   badge,
   label,
   icon = '•',
-  tone = 'slate',
+  tone = 'blue',
   className = '',
 }) {
-  const toneStyles = {
-    slate: 'border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950/40',
-    rose: 'border-rose-200 bg-rose-50/80 dark:border-rose-900/50 dark:bg-rose-950/20',
-    amber: 'border-amber-200 bg-amber-50/80 dark:border-amber-900/50 dark:bg-amber-950/20',
-    emerald: 'border-emerald-200 bg-emerald-50/80 dark:border-emerald-900/50 dark:bg-emerald-950/20',
+  const { theme } = useDashboard();
+  const isDark = theme === 'dark';
+
+  const toneStylesLight = {
+    green: 'border-[#A7F3D0] bg-[#ECFDF5]',
+    peach: 'border-[#FDBA74] bg-[#FFF1F2]',
+    blue: 'border-[#BFDBFE] bg-[#EFF6FF]',
+    slate: 'border-slate-200 bg-white',
   };
 
-  const iconStyles = {
-    slate: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
-    rose: 'bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300',
-    amber: 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300',
-    emerald: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300',
+  const toneStylesDark = {
+    green: 'border-slate-700 bg-slate-900',
+    peach: 'border-slate-700 bg-slate-900',
+    blue: 'border-slate-700 bg-slate-900',
+    slate: 'border-slate-700 bg-slate-900',
   };
+
+  const iconStylesLight = {
+    green: 'border border-[#A7F3D0] bg-white/90 text-emerald-700 shadow-sm',
+    peach: 'border border-[#FBCFE8] bg-white/90 text-rose-700 shadow-sm',
+    blue: 'border border-[#BFDBFE] bg-white/90 text-sky-700 shadow-sm',
+    slate: 'bg-slate-100 text-slate-700',
+  };
+
+  const iconStylesDark = {
+    green: 'border border-slate-700 bg-slate-800 text-emerald-300',
+    peach: 'border border-slate-700 bg-slate-800 text-rose-300',
+    blue: 'border border-slate-700 bg-slate-800 text-sky-300',
+    slate: 'border border-slate-700 bg-slate-800 text-slate-100',
+  };
+
+  const toneStyles = isDark ? toneStylesDark : toneStylesLight;
+  const iconStyles = isDark ? iconStylesDark : iconStylesLight;
 
   const cardTone = toneStyles[tone] ?? toneStyles.slate;
   const iconTone = iconStyles[tone] ?? iconStyles.slate;
+  const headingClass = isDark ? 'text-white' : 'theme-text-strong';
+  const mutedClass = isDark ? 'text-slate-400' : 'theme-muted';
+  const labelClass = isDark ? 'text-white' : 'theme-text-strong';
+  const badgeClass = isDark
+    ? 'rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-100 shadow-sm transition duration-300 group-hover:shadow'
+    : 'theme-surface-soft theme-text rounded-full border px-3 py-1 text-xs font-semibold shadow-sm transition duration-300 group-hover:shadow';
 
   return (
     <article
-      className={`group motion-card motion-fade-up rounded-3xl border p-4 shadow-sm sm:p-5 ${cardTone} ${className}`}
+      className={`group motion-card motion-fade-up rounded-2xl border p-4 shadow-sm shadow-slate-900/5 sm:p-5 ${cardTone} ${className}`}
     >
       <div className="flex items-center justify-between gap-3">
-        <span className="theme-muted text-[11px] font-semibold uppercase tracking-[0.14em]">
+        <span className={`text-[11px] font-medium uppercase tracking-[0.14em] ${labelClass}`}>
           {label || 'Insight'}
         </span>
         {badge ? (
-          <span className="theme-surface-soft theme-text rounded-full border px-3 py-1 text-xs font-semibold shadow-sm transition duration-300 group-hover:shadow">
+          <span className={badgeClass}>
             {badge}
           </span>
         ) : null}
       </div>
 
-      <div className="mt-3 flex items-start gap-3.5">
+      <div className="mt-4 flex items-start gap-3.5">
         <span
-          className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-semibold ${iconTone}`}
+          className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-semibold ${iconTone}`}
           aria-hidden="true"
         >
           {icon}
         </span>
-        <div>
-          <h4 className="theme-text-strong text-base font-semibold">{title}</h4>
-          <p className="theme-muted mt-1.5 text-sm leading-6">{description}</p>
+        <div className="min-w-0">
+          <h4 className={`text-lg font-semibold leading-6 ${headingClass}`}>{title}</h4>
+          <p className={`mt-1.5 text-sm font-normal leading-6 ${mutedClass}`}>{description}</p>
         </div>
       </div>
     </article>
